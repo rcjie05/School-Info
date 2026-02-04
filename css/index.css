@@ -1,0 +1,186 @@
+/* ============================================================
+   css/index.css — Login / Setup page styles
+   ============================================================ */
+
+:root {
+    --primary:       #1a4d2e;
+    --primary-light: #2d6a4f;
+    --accent:        #ffa500;
+    --bg-main:       #faf9f6;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ----- Login Container ----- */
+.container {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(26, 77, 46, 0.1);
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.logo {
+    font-family: 'Crimson Pro', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6b6b6b;
+    margin-bottom: 30px;
+}
+
+/* ----- Setup / First-Time Section ----- */
+.setup-section {
+    background: #fff3e0;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.setup-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.setup-steps {
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.setup-steps li {
+    counter-increment: step-counter;
+    margin-bottom: 12px;
+    padding-left: 35px;
+    position: relative;
+}
+
+.setup-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--accent);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ----- Login Buttons ----- */
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 77, 46, 0.2);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+/* ----- Login Form Inputs ----- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0dfd9;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+/* ----- Alerts ----- */
+.alert {
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.alert-error {
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+}
+
+.alert-success {
+    background: #efe;
+    color: #3c3;
+    border: 1px solid #cfc;
+}
+
+/* ----- Misc Helpers ----- */
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+}
+
+code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.demo-credentials {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f9ff;
+    border-radius: 8px;
+    font-size: 13px;
+}

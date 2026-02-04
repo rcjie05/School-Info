@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - School Info System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-admin.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">School Info</div>
+                <div class="sidebar-user">Administrator</div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-page="overview">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item" data-page="users">
+                    <span>👥</span>
+                    <span>User Management</span>
+                </div>
+                <div class="menu-item" data-page="buildings">
+                    <span>🏛️</span>
+                    <span>Buildings &amp; Rooms</span>
+                </div>
+                <div class="menu-item" data-page="departments">
+                    <span>🏢</span>
+                    <span>Departments</span>
+                </div>
+                <div class="menu-item" data-page="announcements">
+                    <span>📢</span>
+                    <span>Announcements</span>
+                </div>
+                <div class="menu-item" data-page="feedback">
+                    <span>💬</span>
+                    <span>Feedback &amp; Inquiries</span>
+                </div>
+                <div class="menu-item" data-page="audit">
+                    <span>📋</span>
+                    <span>Audit Logs</span>
+                </div>
+                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+                    <span>🗺️</span>
+                    <span>Floor Plan</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Overview Section -->
+            <div class="content-section active" id="overview">
+                <div class="page-header">
+                    <h1 class="page-title">Admin Dashboard</h1>
+                    <p class="page-subtitle">System overview and management</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dbeafe; color: #1e40af;">👨‍🎓</div>
+                        <div class="stat-value">1,247</div>
+                        <div class="stat-label">Total Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #15803d;">👨‍🏫</div>
+                        <div class="stat-value">89</div>
+                        <div class="stat-label">Total Teachers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #92400e;">🏛️</div>
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Total Buildings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fce7f3; color: #9f1239;">🚪</div>
+                        <div class="stat-value">142</div>
+                        <div class="stat-label">Total Rooms</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📊 System Activity</h2>
+                    <div class="stats-grid">
+                        <div>
+                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Active Sessions</h4>
+                            <p style="font-size: 24px; font-weight: 700;">324</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Today's Logins</h4>
+                            <p style="font-size: 24px; font-weight: 700;">892</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Pending Feedback</h4>
+                            <p style="font-size: 24px; font-weight: 700;">15</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management Section -->
+            <div class="content-section" id="users">
+                <div class="page-header">
+                    <h1 class="page-title">User Management</h1>
+                    <p class="page-subtitle">Manage students, teachers, and staff accounts</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>👥 All Users</span>
+                        <button class="btn btn-primary" onclick="openModal('addUserModal')">+ Add New User</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>jdelacruz</td>
+                                <td><span class="badge badge-info">Student</span></td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Dr. Maria Santos</td>
+                                <td>msantos</td>
+                                <td><span class="badge badge-success">Teacher</span></td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Buildings & Rooms Section -->
+            <div class="content-section" id="buildings">
+                <div class="page-header">
+                    <h1 class="page-title">Buildings &amp; Rooms</h1>
+                    <p class="page-subtitle">Manage campus buildings and room assignments</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>🏛️ Buildings</span>
+                        <button class="btn btn-primary" onclick="openModal('addBuildingModal')">+ Add Building</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Building Name</th>
+                                <th>Code</th>
+                                <th>Floors</th>
+                                <th>Accessibility</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Main Building</td>
+                                <td>MB</td>
+                                <td>4</td>
+                                <td><span class="badge badge-success">Elevator, Ramp</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Science Building</td>
+                                <td>SB</td>
+                                <td>3</td>
+                                <td><span class="badge badge-warning">Ramp Only</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Departments Section -->
+            <div class="content-section" id="departments">
+                <div class="page-header">
+                    <h1 class="page-title">Department Management</h1>
+                    <p class="page-subtitle">Manage academic and administrative departments</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>🏢 Departments</span>
+                        <button class="btn btn-primary" onclick="openModal('addDeptModal')">+ Add Department</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Department Name</th>
+                                <th>Code</th>
+                                <th>Location</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Computer Science</td>
+                                <td>CS</td>
+                                <td>EB-301</td>
+                                <td>cs@school.edu</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>MATH</td>
+                                <td>MB-201</td>
+                                <td>math@school.edu</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Announcements Section -->
+            <div class="content-section" id="announcements">
+                <div class="page-header">
+                    <h1 class="page-title">Announcements</h1>
+                    <p class="page-subtitle">Post and manage school-wide announcements</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>📢 All Announcements</span>
+                        <button class="btn btn-primary" onclick="openModal('addAnnouncementModal')">+ New Announcement</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Target</th>
+                                <th>Priority</th>
+                                <th>Posted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Midterm Examination Schedule</td>
+                                <td><span class="badge badge-info">All</span></td>
+                                <td><span class="badge badge-danger">High</span></td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Feedback Section -->
+            <div class="content-section" id="feedback">
+                <div class="page-header">
+                    <h1 class="page-title">Feedback &amp; Inquiries</h1>
+                    <p class="page-subtitle">View and respond to student feedback</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">💬 Pending Feedback</h2>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>Type</th>
+                                <th>Subject</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juan Dela Cruz</td>
+                                <td><span class="badge badge-info">Question</span></td>
+                                <td>Room 305 Location Inquiry</td>
+                                <td><span class="badge badge-warning">Pending</span></td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Respond</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Audit Logs Section -->
+            <div class="content-section" id="audit">
+                <div class="page-header">
+                    <h1 class="page-title">Audit Logs</h1>
+                    <p class="page-subtitle">System activity and change tracking</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📋 Recent Activity</h2>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>admin</td>
+                                <td>User Created</td>
+                                <td>Added new student: Juan Dela Cruz</td>
+                                <td>2026-02-03 10:30:45</td>
+                            </tr>
+                            <tr>
+                                <td>registrar</td>
+                                <td>Room Updated</td>
+                                <td>Changed room assignment for CS201</td>
+                                <td>2026-02-03 09:15:22</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Modals ===== -->
+
+    <!-- Add User Modal -->
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New User</h2>
+                <span class="modal-close" onclick="closeModal('addUserModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <select class="form-select" required>
+                            <option>Student</option>
+                            <option>Teacher</option>
+                            <option>Registrar</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Building Modal -->
+    <div class="modal" id="addBuildingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Building</h2>
+                <span class="modal-close" onclick="closeModal('addBuildingModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Building Name</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Building Code</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Number of Floors</label>
+                    <input type="number" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox"> Has Elevator
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox"> Has Ramp
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Building</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div class="modal" id="addDeptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Department</h2>
+                <span class="modal-close" onclick="closeModal('addDeptModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Department Name</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department Code</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Building</label>
+                        <select class="form-select" required>
+                            <option>Main Building</option>
+                            <option>Science Building</option>
+                            <option>Engineering Building</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Room Number</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Department</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Announcement Modal -->
+    <div class="modal" id="addAnnouncementModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">New Announcement</h2>
+                <span class="modal-close" onclick="closeModal('addAnnouncementModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Target Audience</label>
+                        <select class="form-select" required>
+                            <option>All</option>
+                            <option>Students</option>
+                            <option>Teachers</option>
+                            <option>Registrar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Priority</label>
+                        <select class="form-select" required>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                            <option>Urgent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Content</label>
+                    <textarea class="form-input" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Announcement</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts: shared nav/logout, then admin modals -->
+    <script src="js/scripts.js"></script>
+    <script src="js/dashboard-admin.js"></script>
+</body>
+</html>

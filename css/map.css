@@ -1,0 +1,323 @@
+/* ============================================================
+   map.css  –  shared styles for the interactive campus map
+   Used by both dashboard-student and dashboard-admin.
+   ============================================================ */
+
+/* ─── map-panel wrapper ──────────────────────────────────── */
+.map-panel { width: 100%; }
+
+/* ─── toolbar row  ───────────────────────────────────────── */
+.map-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+.map-toolbar .map-search-wrap { flex: 1; min-width: 200px; }
+.map-toolbar .map-search-wrap label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+.map-search {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color .25s;
+    background: #fff;
+}
+.map-search:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,.15); }
+
+/* floor selector pills */
+.map-floor-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.map-floor-btn {
+    padding: 8px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all .2s;
+}
+.map-floor-btn:hover { border-color: #667eea; background: #f3f4f6; }
+.map-floor-btn.active { background: #667eea; color: #fff; border-color: #667eea; }
+
+/* ─── legend row  ────────────────────────────────────────── */
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 8px 0 12px;
+    font-size: 13px;
+    color: #6b7280;
+}
+.map-legend-item { display: flex; align-items: center; gap: 6px; }
+.map-legend-swatch {
+    width: 24px; height: 15px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.12);
+}
+.swatch-office    { background: linear-gradient(135deg,#ffd966,#f4c430); }
+.swatch-classroom { background: linear-gradient(135deg,#b4d7d8,#7fb3d5); }
+.swatch-facility  { background: linear-gradient(135deg,#a8d08d,#6fa84e); }
+.swatch-special   { background: linear-gradient(135deg,#ea9999,#d87878); }
+
+/* ─── hint line  ─────────────────────────────────────────── */
+.map-hint {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/*  FLOOR-PLAN BOX  –  the single most important sizing rule  */
+/* ─────────────────────────────────────────────────────────── */
+.map-floorplan-wrap {
+    position: relative;
+    width: 100%;
+    /* hard minimum so percentage-based rooms always have pixels to work with */
+    min-height: 420px;
+    /* on wider screens honour 4:3 */
+    aspect-ratio: 4 / 3;
+    background: #eef2f7;
+    border: 2px solid #dce3ec;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+
+/* inner white canvas – fills the wrap completely */
+.map-floorplan {
+    position: absolute;
+    inset: 0;                /* top/right/bottom/left = 0  →  100 % × 100 % */
+    background: #fff;
+}
+
+/* ─── individual rooms  ─────────────────────────────────── */
+.map-room {
+    position: absolute;
+    border: 2px solid #555;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: clamp(8px, 1.2vw, 13px);
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 2px 3px;
+    cursor: pointer;
+    transition: box-shadow .2s, border-color .2s, transform .15s;
+    overflow: hidden;
+    user-select: none;
+    /* keep text readable even in tiny rooms */
+    word-break: break-word;
+}
+.map-room:hover {
+    border-color: #667eea;
+    box-shadow: 0 3px 14px rgba(0,0,0,.22);
+    z-index: 2;
+    transform: scale(1.04);
+}
+
+/* room-type fills */
+.map-room.office    { background: linear-gradient(135deg,#ffd966,#f4c430); }
+.map-room.classroom { background: linear-gradient(135deg,#b4d7d8,#7fb3d5); }
+.map-room.facility  { background: linear-gradient(135deg,#a8d08d,#6fa84e); }
+.map-room.special   { background: linear-gradient(135deg,#ea9999,#d87878); }
+
+/* highlight pulse  */
+.map-room.highlighted {
+    border-color: #ff6b6b !important;
+    border-width: 3px !important;
+    box-shadow: 0 0 20px rgba(255,107,107,.7) !important;
+    z-index: 3;
+    animation: map-pulse 1.6s ease-in-out infinite;
+}
+@keyframes map-pulse {
+    0%,100% { box-shadow: 0 0 14px rgba(255,107,107,.5); }
+    50%     { box-shadow: 0 0 30px rgba(255,107,107,.9); }
+}
+
+/* start / end border highlights  */
+.map-room.start-point {
+    border-color: #4CAF50 !important;
+    border-width: 3px !important;
+    box-shadow: 0 0 16px rgba(76,175,80,.6) !important;
+}
+.map-room.end-point {
+    border-color: #f44336 !important;
+    border-width: 3px !important;
+    box-shadow: 0 0 16px rgba(244,67,54,.6) !important;
+}
+
+/* ─── SVG path layer  ────────────────────────────────────── */
+.map-path-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;   /* clicks fall through to rooms */
+    z-index: 5;
+}
+
+/* animated dashed route  */
+.map-route {
+    fill: none;
+    stroke: #ff6b6b;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 8 5;
+    animation: map-dash 1.3s linear infinite;
+}
+@keyframes map-dash { to { stroke-dashoffset: -26; } }
+
+/* start / end dot markers  */
+.map-marker-start { fill: #4CAF50; filter: drop-shadow(0 0 4px rgba(76,175,80,.7)); }
+.map-marker-end   { fill: #f44336; filter: drop-shadow(0 0 4px rgba(244,67,54,.7)); }
+.map-marker-pulse {
+    animation: map-marker-pop 1.5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+@keyframes map-marker-pop { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.55);opacity:.55} }
+
+/* moving dot  */
+.map-moving-dot {
+    fill: #ff6b6b;
+    filter: drop-shadow(0 0 6px rgba(255,107,107,.85));
+}
+
+/* ─── directions panel  ─────────────────────────────────── */
+.map-directions {
+    margin-top: 18px;
+    background: #fffbeb;
+    border: 1px solid #ffe082;
+    border-left: 5px solid #f59e0b;
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: none;
+}
+.map-directions.visible { display: block; }
+.map-directions h4 { margin-bottom: 10px; color: #795548; font-size: 15px; }
+.map-dir-step {
+    padding: 9px 14px;
+    background: #fff;
+    border-radius: 7px;
+    border-left: 3px solid #ffe082;
+    margin-bottom: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ─── hover tooltip  ─────────────────────────────────────── */
+.map-room-tooltip {
+    position: absolute;
+    background: rgba(25,25,35,.93);
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 20;
+    box-shadow: 0 4px 18px rgba(0,0,0,.28);
+    display: none;
+    max-width: 200px;
+    word-wrap: break-word;
+    /* so it doesn't jump around */
+    transition: left .05s, top .05s;
+}
+.map-room-tooltip.visible { display: block; }
+.map-room-tooltip strong { color: #ffcc80; }
+
+/* ─── admin editor bar  ──────────────────────────────────── */
+.map-editor-bar {
+    display: none;          /* toggled to flex via .visible */
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 16px;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+.map-editor-bar.visible { display: flex; }
+.map-editor-bar > span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #92400e;
+}
+.map-editor-hint {
+    font-size: 12px;
+    color: #7c3aed;
+    font-style: italic;
+    margin-left: auto;
+}
+
+.map-editor-btn {
+    padding: 6px 13px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    cursor: pointer;
+    transition: filter .2s, transform .15s, box-shadow .15s;
+}
+.map-editor-btn:hover { filter: brightness(1.18); transform: translateY(-1px); }
+.map-editor-btn.active { box-shadow: inset 0 2px 5px rgba(0,0,0,.35); transform: none; filter: none; }
+
+.btn-add    { background: #27ae60; }
+.btn-edge   { background: #e67e22; }
+.btn-remove { background: #e74c3c; }
+.btn-save   { background: #667eea; }
+
+/* waypoint overlay nodes / edges  */
+.wp-node {
+    fill: #fff;
+    stroke: rgba(0,0,0,.55);
+    stroke-width: 0.4;
+    cursor: move;
+    transition: fill .15s;
+}
+.wp-node:hover { fill: #ffe082; }
+.wp-node.selected { stroke: #667eea; stroke-width: 0.7; fill: #fff; }
+.wp-edge { stroke: rgba(255,165,0,.85); stroke-width: 1; }
+.wp-label {
+    font-size: 2.2px;
+    fill: rgba(0,0,0,.5);
+    pointer-events: none;
+    font-family: sans-serif;
+}
+
+/* ─── responsive  ───────────────────────────────────────── */
+@media (max-width: 700px) {
+    .map-toolbar         { flex-direction: column; align-items: stretch; }
+    .map-floor-btns      { justify-content: center; }
+    .map-floorplan-wrap  { aspect-ratio: auto; min-height: 340px; height: 340px; }
+}
+
+/* Room list grouping styles */
+.room-list { padding: 6px 0; }
+.room-group { border-radius: 8px; overflow: hidden; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.04); }
+.group-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #f7fafc; cursor: pointer; }
+.group-header .group-title { font-weight: 700; text-transform: capitalize; }
+.group-header .group-meta { display:flex; gap:8px; align-items:center; color: #6b7280; }
+.group-toggle { background: transparent; border: none; font-size: 14px; cursor: pointer; padding: 4px; }
+.group-items { padding: 8px 6px; display: grid; gap: 6px; }
+.room-group.collapsed .group-items { display: none; }
+.room-item { padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #eef2f7; display:flex; justify-content:space-between; align-items:center; cursor: pointer; }
+.room-item:hover { transform: translateX(4px); background: #f3f5ff; }
+.room-item .info-badge { background: #667eea; color: #fff; padding: 4px 8px; border-radius: 999px; font-size: 12px; }

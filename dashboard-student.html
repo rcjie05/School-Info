@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - School Info System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-student.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">School Info</div>
+                <div class="sidebar-user">Juan Dela Cruz - CS-2024-001</div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-page="overview">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Overview</span>
+                </div>
+                <div class="menu-item" data-page="map">
+                    <span class="menu-icon">🗺️</span>
+                    <span class="menu-text">Campus Map</span>
+                </div>
+                <div class="menu-item" data-page="schedule">
+                    <span class="menu-icon">📅</span>
+                    <span class="menu-text">My Schedule</span>
+                </div>
+                <div class="menu-item" data-page="grades">
+                    <span class="menu-icon">📝</span>
+                    <span class="menu-text">Grades</span>
+                </div>
+                <div class="menu-item" data-page="faculty">
+                    <span class="menu-icon">👥</span>
+                    <span class="menu-text">Faculty Directory</span>
+                </div>
+                <div class="menu-item" data-page="announcements">
+                    <span class="menu-icon">📢</span>
+                    <span class="menu-text">Announcements</span>
+                </div>
+                <div class="menu-item" data-page="feedback">
+                    <span class="menu-icon">💬</span>
+                    <span class="menu-text">Feedback</span>
+                </div>
+                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+                    <span class="menu-icon">🗺️</span>
+                    <span class="menu-text">Floor Plan</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <span class="menu-icon">🚪</span>
+                    <span class="menu-text">Logout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Overview Page -->
+            <div class="content-section active" id="overview">
+    <div class="page-header">
+        <h1 class="page-title">Welcome Back, Juan!</h1>
+        <p class="page-subtitle">Here's your academic overview for this semester</p>
+    </div>
+
+    <!-- Stats row like reference -->
+    <div class="stats-row">
+        <div class="stat-box">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Enrolled Subjects</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">Enrolled</div>
+            <div class="stat-label">Status</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">2.15</div>
+            <div class="stat-label">Current GPA</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">Paid</div>
+            <div class="stat-label">Payment</div>
+        </div>
+    </div>
+
+    <!-- Calendar Attendance -->
+    <div class="calendar-card">
+        <h2 class="calendar-title">Calendar Attendance</h2>
+        <div class="calendar-grid">
+            <!-- Days header -->
+            <div class="calendar-day">Sun</div>
+            <div class="calendar-day">Mon</div>
+            <div class="calendar-day">Tue</div>
+            <div class="calendar-day">Wed</div>
+            <div class="calendar-day">Thu</div>
+            <div class="calendar-day">Fri</div>
+            <div class="calendar-day">Sat</div>
+            <!-- Example days - add your logic -->
+            <div class="calendar-day"></div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day event">2</div>
+            <!-- ... fill with JS or static for demo -->
+        </div>
+    </div>
+
+    <!-- Activities & Events -->
+    <div class="activities-card">
+        <h2>Activities & Events</h2>
+        <ul class="activities-list">
+            <li>Valentines Grams by Senior Classes</li>
+            <li>Spring Sports Rally</li>
+            <li>Senior First Day Quad Takeover</li>
+            <li>Freshman Orientation</li>
+        </ul>
+    </div>
+
+    <!-- Your existing quick search and announcements -->
+    <div class="search-field">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" placeholder="Search for room, building, or department..." id="quickSearch">
+</div>
+
+    <!-- ... announcements ... -->
+</div>
+
+            <!-- Campus Map Page -->
+            <div class="content-section" id="map">
+    <div class="map-section">
+        <div class="map-header">
+            <h1 class="map-title">Campus Map</h1>
+            <p class="map-subtitle">Explore buildings, floors, accessibility, and room locations</p>
+        </div>
+
+        <div class="search-field">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" placeholder="Search building, room number, or facility..." id="buildingSearch">
+</div>
+
+        <div class="building-grid">
+            <!-- Main Building -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Main Building (MB)</h3>
+                    <p class="building-category">Main Administrative & Lecture</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>4 Floors</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Elevator & Ramp Available</div>
+                    <div class="building-info-item"><span class="emoji">🚪</span> Rooms: 101–405</div>
+                    <div class="building-info-item"><span class="emoji">📚</span> Registrar, Admin, Classrooms</div>
+                </div>
+            </div>
+
+            <!-- Science Building -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Science Building (SB)</h3>
+                    <p class="building-category">Laboratories & Research</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>3 Floors</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Ramp Available</div>
+                    <div class="building-info-item"><span class="emoji">🚪</span> Rooms: 101–305</div>
+                    <div class="building-info-item"><span class="emoji">🧪</span> Chem, Bio, Physics Labs</div>
+                </div>
+            </div>
+
+            <!-- Engineering Building -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Engineering Building (EB)</h3>
+                    <p class="building-category">Engineering & Computer Labs</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>5 Floors</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Elevator & Ramp Available</div>
+                    <div class="building-info-item"><span class="emoji">🚪</span> Rooms: 101–505</div>
+                    <div class="building-info-item"><span class="emoji">💻</span> CS Labs, Workshops</div>
+                </div>
+            </div>
+
+            <!-- Library -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Library Building (LB)</h3>
+                    <p class="building-category">Study & Resource Center</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>2 Floors</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Elevator & Ramp Available</div>
+                    <div class="building-info-item"><span class="emoji">📖</span> Reading Areas, Digital Resources</div>
+                    <div class="building-info-item"><span class="emoji">☕</span> Quiet Zone & Café Corner</div>
+                </div>
+            </div>
+
+            <!-- Arts Building -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Arts Building (AB)</h3>
+                    <p class="building-category">Creative & Performing Arts</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>3 Floors</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Ramp Available</div>
+                    <div class="building-info-item"><span class="emoji">🎨</span> Studios, Workshops, Gallery</div>
+                    <div class="building-info-item"><span class="emoji">🎭</span> Theater & Music Rooms</div>
+                </div>
+            </div>
+
+            <!-- Sports Complex -->
+            <div class="building-card">
+                <div class="building-card-header">
+                    <h3 class="building-name">Sports Complex (SC)</h3>
+                    <p class="building-category">Athletics & Recreation</p>
+                </div>
+                <div class="building-card-body">
+                    <div class="building-info-item"><span class="emoji">🏢</span> <strong>2 Floors + Outdoor</strong></div>
+                    <div class="building-info-item"><span class="emoji">♿</span> Fully Accessible</div>
+                    <div class="building-info-item"><span class="emoji">🏀</span> Gym, Courts, Track</div>
+                    <div class="building-info-item"><span class="emoji">🏊</span> Swimming Pool (seasonal)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Schedule Page -->
+            <div class="content-section" id="schedule">
+                <div class="page-header">
+                    <h1 class="page-title">My Class Schedule</h1>
+                    <p class="page-subtitle">Second Semester, SY 2025-2026</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📅 Weekly Schedule</h2>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Room</th>
+                                <th>Instructor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="subject-code">CS201</span></td>
+                                <td>Data Structures &amp; Algorithms</td>
+                                <td>Mon, Wed</td>
+                                <td>9:00 AM - 10:30 AM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-201')">EB-201</a></td>
+                                <td>Dr. Maria Santos</td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">CS202</span></td>
+                                <td>Database Management Systems</td>
+                                <td>Tue, Thu</td>
+                                <td>10:30 AM - 12:00 PM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-305')">EB-305</a></td>
+                                <td>Prof. John Reyes</td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">MATH301</span></td>
+                                <td>Discrete Mathematics</td>
+                                <td>Mon, Wed, Fri</td>
+                                <td>1:00 PM - 2:00 PM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('MB-201')">MB-201</a></td>
+                                <td>Dr. Ana Cruz</td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">CS203</span></td>
+                                <td>Web Development</td>
+                                <td>Tue, Thu</td>
+                                <td>2:00 PM - 3:30 PM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-102')">EB-102 (Lab)</a></td>
+                                <td>Mr. Pedro Garcia</td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">PE102</span></td>
+                                <td>Physical Education 2</td>
+                                <td>Friday</td>
+                                <td>3:30 PM - 5:00 PM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('SC-GYM')">Sports Complex</a></td>
+                                <td>Coach Alex Tan</td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">NSTP102</span></td>
+                                <td>National Service Training Program 2</td>
+                                <td>Saturday</td>
+                                <td>8:00 AM - 12:00 PM</td>
+                                <td><a class="room-link" onclick="showRoomInfo('MB-101')">MB-101</a></td>
+                                <td>Ms. Lisa Mendoza</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Grades Page -->
+            <div class="content-section" id="grades">
+                <div class="page-header">
+                    <h1 class="page-title">My Grades</h1>
+                    <p class="page-subtitle">Academic performance overview</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📊 Second Semester, SY 2025-2026</h2>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Units</th>
+                                <th>Midterm</th>
+                                <th>Final</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="subject-code">CS201</span></td>
+                                <td>Data Structures &amp; Algorithms</td>
+                                <td>3</td>
+                                <td>2.0</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">CS202</span></td>
+                                <td>Database Management Systems</td>
+                                <td>3</td>
+                                <td>2.25</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">MATH301</span></td>
+                                <td>Discrete Mathematics</td>
+                                <td>3</td>
+                                <td>2.5</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">CS203</span></td>
+                                <td>Web Development</td>
+                                <td>3</td>
+                                <td>1.75</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">PE102</span></td>
+                                <td>Physical Education 2</td>
+                                <td>2</td>
+                                <td>1.5</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">NSTP102</span></td>
+                                <td>NSTP 2</td>
+                                <td>3</td>
+                                <td>2.0</td>
+                                <td>-</td>
+                                <td><span class="grade-badge grade-incomplete">Ongoing</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📈 Previous Semester (First Sem 2025-2026)</h2>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Units</th>
+                                <th>Final Grade</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="subject-code">CS101</span></td>
+                                <td>Introduction to Computing</td>
+                                <td>3</td>
+                                <td>2.0</td>
+                                <td><span class="grade-badge grade-passed">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">PROG101</span></td>
+                                <td>Computer Programming 1</td>
+                                <td>3</td>
+                                <td>2.25</td>
+                                <td><span class="grade-badge grade-passed">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="subject-code">MATH101</span></td>
+                                <td>College Algebra</td>
+                                <td>3</td>
+                                <td>2.5</td>
+                                <td><span class="grade-badge grade-passed">Passed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Faculty Directory Page -->
+            <div class="content-section" id="faculty">
+                <div class="page-header">
+                    <h1 class="page-title">Faculty Directory</h1>
+                    <p class="page-subtitle">Find your instructors and their office locations</p>
+                </div>
+
+                <div class="search-field">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search building, room number, or facility..." id="buildingSearch">
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Office Location</th>
+                                <th>Office Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Dr. Maria Santos</strong></td>
+                                <td>Computer Science</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-301')">EB-301</a></td>
+                                <td>Mon-Wed 3:00 PM - 5:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Prof. John Reyes</strong></td>
+                                <td>Computer Science</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-302')">EB-302</a></td>
+                                <td>Tue-Thu 1:00 PM - 3:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dr. Ana Cruz</strong></td>
+                                <td>Mathematics</td>
+                                <td><a class="room-link" onclick="showRoomInfo('MB-301')">MB-301</a></td>
+                                <td>Mon-Fri 10:00 AM - 12:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mr. Pedro Garcia</strong></td>
+                                <td>Computer Science</td>
+                                <td><a class="room-link" onclick="showRoomInfo('EB-303')">EB-303</a></td>
+                                <td>Tue-Thu 4:00 PM - 6:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coach Alex Tan</strong></td>
+                                <td>Physical Education</td>
+                                <td><a class="room-link" onclick="showRoomInfo('SC-OFFICE')">Sports Complex Office</a></td>
+                                <td>Mon-Fri 2:00 PM - 4:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ms. Lisa Mendoza</strong></td>
+                                <td>NSTP Department</td>
+                                <td><a class="room-link" onclick="showRoomInfo('MB-305')">MB-305</a></td>
+                                <td>Sat 1:00 PM - 3:00 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Announcements Page -->
+            <div class="content-section" id="announcements">
+                <div class="page-header">
+                    <h1 class="page-title">Announcements</h1>
+                    <p class="page-subtitle">Latest updates and important notices</p>
+                </div>
+
+                <div class="card">
+                    <div class="announcement-item">
+                        <div class="announcement-title">🎓 Graduation Application Deadline</div>
+                        <div class="announcement-content">All graduating students are reminded to submit their graduation application forms by March 15, 2026. Forms are available at the Registrar's Office.</div>
+                        <div class="announcement-meta">Posted 3 hours ago by Registrar Office</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-title">📅 Midterm Examinations Schedule Released</div>
+                        <div class="announcement-content">The schedule for midterm examinations has been posted. Please check your respective departments for room assignments.</div>
+                        <div class="announcement-meta">Posted 2 hours ago by Registrar Office</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-title">🚧 Room 305 Temporarily Relocated</div>
+                        <div class="announcement-content">Classes scheduled in Room 305, Main Building will be held in Room 201, Science Building until further notice due to maintenance work.</div>
+                        <div class="announcement-meta">Posted 1 day ago by Admin</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-title">📚 Library Extended Hours</div>
+                        <div class="announcement-content">The library will be open until 10:00 PM during the midterm exam period (Feb 10-21). Make the most of your study time!</div>
+                        <div class="announcement-meta">Posted 2 days ago by Library Services</div>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-title">🌐 Free WiFi Upgrade Completed</div>
+                        <div class="announcement-content">Campus-wide WiFi upgrade is complete! Enjoy faster and more stable internet connection across all buildings.</div>
+                        <div class="announcement-meta">Posted 3 days ago by IT Department</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Page -->
+            <div class="content-section" id="feedback">
+                <div class="page-header">
+                    <h1 class="page-title">Submit Feedback</h1>
+                    <p class="page-subtitle">We value your questions, suggestions, and concerns</p>
+                </div>
+
+                <div class="card">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label class="form-label">Feedback Type</label>
+                            <select class="form-select" required>
+                                <option value="question">Question</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="suggestion">Suggestion</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <input type="text" class="form-input" placeholder="Brief subject of your feedback" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-input" rows="6" placeholder="Describe your feedback in detail..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">🤖</div>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">School Info Assistant</div>
+            <div class="chatbot-subtitle">Ask me anything about campus!</div>
+        </div>
+
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message message-bot">
+                <div class="message-avatar">🤖</div>
+                <div class="message-bubble">
+                    Hi! I'm your School Info Assistant. I can help you find rooms, faculty offices, class schedules, and answer questions about campus facilities. How can I help you today?
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-input-area">
+            <input type="text" class="chatbot-input" id="chatInput" placeholder="Type your question...">
+            <button class="chatbot-send" onclick="sendMessage()">📤</button>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/dashboard-student.js"></script>
+</body>
+</html>

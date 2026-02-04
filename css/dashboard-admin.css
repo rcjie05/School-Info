@@ -1,0 +1,337 @@
+/* ============================================================
+   css/dashboard-admin.css — Admin dashboard inspired by Other Levels Smart Schools
+   ============================================================ */
+
+:root {
+    --primary:        #6d28d9;          /* purple main */
+    --primary-light:  #8b5cf6;
+    --primary-dark:   #5b21b6;
+    --accent:         #f59e0b;          /* amber/orange accents */
+    --success:        #10b981;
+    --info:           #3b82f6;
+    --warning:        #f59e0b;
+    --danger:         #ef4444;
+    --sidebar-bg:     #2c1b47;          /* dark navy/purple sidebar */
+    --sidebar-text:   #e0d4ff;
+    --bg-main:        #f8fafc;
+    --card-bg:        white;
+    --border:         #e2e8f0;
+    --text-primary:   #1f2937;
+    --text-secondary: #6b7280;
+    --shadow-sm:      0 4px 12px rgba(0,0,0,0.06);
+    --shadow-md:      0 10px 30px rgba(0,0,0,0.12);
+    --radius:         16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+/* Layout */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 32px 20px;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.25);
+}
+
+.sidebar-header {
+    margin-bottom: 48px;
+}
+
+.sidebar-logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -1px;
+}
+
+.sidebar-user {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    transform: translateX(6px);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 40px 48px;
+    background: var(--bg-main);
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--primary);
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Stats Cards Row (horizontal colorful like reference) */
+.stats-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 220px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 6px solid;
+    transition: transform 0.25s;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+}
+
+.stat-card:nth-child(1) { border-left-color: var(--info);    } /* Schools */
+.stat-card:nth-child(2) { border-left-color: var(--success); } /* Teachers */
+.stat-card:nth-child(3) { border-left-color: var(--accent);  } /* Students */
+.stat-card:nth-child(4) { border-left-color: #ec4899;        } /* Parents */
+
+.stat-icon {
+    font-size: 42px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Calendar Attendance */
+.calendar-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 28px;
+    margin-bottom: 40px;
+}
+
+.calendar-title {
+    font-size: 22px;
+    margin: 0 0 20px;
+    color: var(--primary);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.calendar-day-header {
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 12px 0;
+}
+
+.calendar-day {
+    padding: 16px 0;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-weight: 500;
+}
+
+.calendar-day.event {
+    background: var(--success);
+    color: white;
+    font-weight: 700;
+}
+
+/* Educational Stage Bar Chart (simple CSS bars) */
+.chart-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 28px;
+    margin-bottom: 40px;
+}
+
+.chart-title {
+    font-size: 22px;
+    margin: 0 0 24px;
+    color: var(--primary);
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bar-label {
+    width: 140px;
+    font-weight: 600;
+}
+
+.bar {
+    height: 36px;
+    border-radius: 8px;
+    background: var(--primary-light);
+    position: relative;
+}
+
+.bar span {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: 700;
+}
+
+/* Activities & Events */
+.activities-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 28px;
+}
+
+.activities-title {
+    font-size: 22px;
+    margin: 0 0 20px;
+}
+
+.activities-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activities-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+}
+
+.activities-list li:last-child {
+    border-bottom: none;
+}
+
+/* Cards & Tables (for other sections) */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 28px;
+    margin-bottom: 40px;
+}
+
+.card-title {
+    font-size: 22px;
+    margin: 0 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .sidebar { width: 240px; }
+    .main-content { margin-left: 240px; padding: 32px 32px; }
+    .stats-row { flex-direction: column; }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

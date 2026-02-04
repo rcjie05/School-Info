@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Info System - Setup & Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">School Info System</div>
+        <div class="subtitle">Setup &amp; Login</div>
+
+        <div class="setup-section">
+            <div class="setup-title">⚠️ First Time Setup Required</div>
+            <p style="margin-bottom: 15px;">Before you can login, please complete these steps:</p>
+            <ol class="setup-steps">
+                <li>Make sure <strong>XAMPP</strong> is installed and running</li>
+                <li>Open <strong>XAMPP Control Panel</strong> and start <strong>Apache</strong> and <strong>MySQL</strong></li>
+                <li>Open <a href="http://localhost/phpmyadmin" target="_blank" class="link">phpMyAdmin</a></li>
+                <li>Click <strong>"New"</strong> and create database: <code>school_info_db</code></li>
+                <li>Select the database, go to <strong>"Import"</strong> tab</li>
+                <li>Choose file: <code>database/schema.sql</code> and click <strong>"Go"</strong></li>
+            </ol>
+            <button class="btn" onclick="window.open('http://localhost/phpmyadmin', '_blank')">Open phpMyAdmin</button>
+            <button class="btn btn-secondary" onclick="testConnection()">Test Database Connection</button>
+        </div>
+
+        <div class="divider">━━━ OR LOGIN DIRECTLY (if setup is complete) ━━━</div>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-input" id="username" value="admin" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="password" value="admin123" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Login As</label>
+                <select class="form-select" id="role">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="registrar">Registrar</option>
+                    <option value="admin" selected>Administrator</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Sign In</button>
+        </form>
+
+        <div class="demo-credentials">
+            <strong>📝 Demo Credentials:</strong><br>
+            Username: <code>admin</code> | Password: <code>admin123</code>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

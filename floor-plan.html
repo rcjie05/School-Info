@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floor Plan — School Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/map.css">
+    <style>
+        :root { --page-bg: #f8fafc; --card-bg: #ffffff; --muted: #6b7280; --accent: #667eea; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%); padding: 18px; color: #1f2937; }
+        .page { max-width: 1200px; margin: 20px auto; }
+        .page-card { background: var(--card-bg); padding: 18px; border-radius: 14px; box-shadow: 0 12px 35px rgba(14,30,37,0.07); }
+
+        .header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+        .header h1 { font-size: 22px; color: #1f2937; margin: 0; }
+        .header p { color: var(--muted); margin: 0; font-size: 13px; }
+
+        .back-btn {
+            background: #fff;
+            border: 1px solid #e6eefb;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #263238;
+            box-shadow: 0 3px 10px rgba(102,126,234,0.06);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102,126,234,0.12); }
+
+        /* container for the injected UI */
+        #mapContainer { width: 100%; margin-top: 12px; }
+        /* ensure map-panel created by mapStudent looks good inside the card */
+        #mapContainer .map-panel { background: transparent; }
+        #mapContainer .main-map-row { gap: 18px; }
+        #mapContainer .map-sidebar { padding: 0; border: none; background: transparent; }
+        #mapContainer .map-area { padding: 0; }
+
+        /* make the floor plan canvas more prominent */
+        #mapContainer .map-floorplan-wrap { border-radius: 12px; box-shadow: 0 8px 26px rgba(17,24,39,0.06); border: 1px solid #e6eefb; }
+
+        /* responsive adjustments */
+        @media (max-width: 880px) {
+            .header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .back-btn { align-self: flex-start; }
+            .page { padding: 12px; }
+            .page-card { padding: 12px; }
+            #mapContainer .main-map-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <button id="backBtn" class="back-btn">← Back</button>
+            <div>
+                <h1>Floor Plan (interactive)</h1>
+                <p>Uses the shared map engine and data. Search, switch floors and get directions.</p>
+            </div>
+        </div>
+
+        <div class="page-card">
+            <!-- mapStudent will inject the interactive UI into this container -->
+            <div id="mapContainer"></div>
+        </div>
+    </div>
+
+    <!-- custom data (overrides window.floorData & waypointGraph for this page) -->
+    <script src="js/floorData_custom.js"></script>
+    <!-- shared engine & UI (reuses existing project code) -->
+    <script src="js/mapEngine.js"></script>
+    <script src="js/mapStudent.js"></script>
+
+    <script>
+        // Initialise the student map inside our container - but only if user is student or admin
+        document.addEventListener('DOMContentLoaded', function() {
+            // Persist that the Floor Plan menu should be active when returning to the dashboard
+            try { localStorage.setItem('activePage', 'floor-plan'); } catch (e) { /* ignore */ }
+
+            var role = null;
+            try { role = localStorage.getItem('userRole'); } catch(e) {}
+            if (role !== 'student' && role !== 'admin') {
+                alert('Access denied. Map is available to students and administrators only.');
+                window.location.href = 'index.html';
+                return;
+            }
+            if (typeof initStudentMap === 'function') initStudentMap('mapContainer');
+            else console.error('initStudentMap is not available. Make sure mapStudent.js is loaded.');
+
+            // Back button behaviour (use history.back when possible, fallback to index)
+            var backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    try {
+                        if (history.length > 1 && document.referrer && document.referrer.indexOf(location.origin) === 0) {
+                            history.back();
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    } catch (e) {
+                        window.location.href = 'index.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

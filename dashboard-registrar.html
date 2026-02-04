@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Dashboard - School Info System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-registrar.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">School Info</div>
+                <div class="sidebar-user">Registrar Office</div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-page="overview">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item" data-page="enrollments">
+                    <span>📝</span>
+                    <span>Enrollments</span>
+                </div>
+                <div class="menu-item" data-page="grades">
+                    <span>📊</span>
+                    <span>Grade Management</span>
+                </div>
+                <div class="menu-item" data-page="schedules">
+                    <span>📅</span>
+                    <span>Class Schedules</span>
+                </div>
+                <div class="menu-item" data-page="students">
+                    <span>👨‍🎓</span>
+                    <span>Student Records</span>
+                </div>
+                <div class="menu-item" data-page="feedback">
+                    <span>💬</span>
+                    <span>Inquiries</span>
+                </div>
+                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+                    <span>🗺️</span>
+                    <span>Floor Plan</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Overview -->
+            <div class="content-section active" id="overview">
+                <div class="page-header">
+                    <h1 class="page-title">Registrar Dashboard</h1>
+                    <p class="page-subtitle">Enrollment and records management</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dbeafe; color: #1e40af;">👨‍🎓</div>
+                        <div class="stat-value">1,247</div>
+                        <div class="stat-label">Enrolled Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #15803d;">✅</div>
+                        <div class="stat-value">1,089</div>
+                        <div class="stat-label">Verified Enrollments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #92400e;">⏳</div>
+                        <div class="stat-value">158</div>
+                        <div class="stat-label">Pending Reviews</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fce7f3; color: #9f1239;">📝</div>
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">Open Inquiries</div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="quick-action-card" onclick="alert('Opening enrollment verification...')">
+                        <div class="quick-action-icon">✅</div>
+                        <div class="quick-action-text">Verify Enrollments</div>
+                    </div>
+                    <div class="quick-action-card" onclick="alert('Opening grade entry...')">
+                        <div class="quick-action-icon">📊</div>
+                        <div class="quick-action-text">Enter Grades</div>
+                    </div>
+                    <div class="quick-action-card" onclick="alert('Opening schedule manager...')">
+                        <div class="quick-action-icon">📅</div>
+                        <div class="quick-action-text">Manage Schedules</div>
+                    </div>
+                    <div class="quick-action-card" onclick="alert('Generating reports...')">
+                        <div class="quick-action-icon">📄</div>
+                        <div class="quick-action-text">Generate Reports</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">⏰ Recent Activity</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Student</th>
+                                <th>Details</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Enrollment Verified</td>
+                                <td>Juan Dela Cruz (2024-CS-001)</td>
+                                <td>6 subjects enrolled</td>
+                                <td>10 minutes ago</td>
+                            </tr>
+                            <tr>
+                                <td>Grade Updated</td>
+                                <td>Maria Garcia (2024-CS-002)</td>
+                                <td>CS201 - Midterm: 2.0</td>
+                                <td>1 hour ago</td>
+                            </tr>
+                            <tr>
+                                <td>Schedule Changed</td>
+                                <td>CS301 Section A</td>
+                                <td>Room changed to EB-205</td>
+                                <td>2 hours ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Enrollments -->
+            <div class="content-section" id="enrollments">
+                <div class="page-header">
+                    <h1 class="page-title">Enrollment Management</h1>
+                    <p class="page-subtitle">Verify and manage student enrollments</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>📝 Pending Enrollments</span>
+                        <button class="btn btn-primary">Batch Verify</button>
+                    </div>
+
+                    <input type="text" class="search-bar" placeholder="🔍 Search by student name or ID...">
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program</th>
+                                <th>Year</th>
+                                <th>Subjects</th>
+                                <th>Payment</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-045</td>
+                                <td>Pedro Santos</td>
+                                <td>BSCS</td>
+                                <td>2nd Year</td>
+                                <td>6 subjects</td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-success">Verify</button>
+                                        <button class="btn btn-sm btn-primary">View</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-IT-023</td>
+                                <td>Ana Reyes</td>
+                                <td>BSIT</td>
+                                <td>3rd Year</td>
+                                <td>5 subjects</td>
+                                <td><span class="badge badge-warning">Partial</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-success">Verify</button>
+                                        <button class="btn btn-sm btn-primary">View</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Grades -->
+            <div class="content-section" id="grades">
+                <div class="page-header">
+                    <h1 class="page-title">Grade Management</h1>
+                    <p class="page-subtitle">Enter and update student grades</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>📊 Grade Entry</span>
+                        <button class="btn btn-primary">Import Grades</button>
+                    </div>
+
+                    <input type="text" class="search-bar" placeholder="🔍 Search by subject code or student...">
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Section</th>
+                                <th>Midterm</th>
+                                <th>Final</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>CS201 - Data Structures</td>
+                                <td>CS-2A</td>
+                                <td><input type="number" style="width: 60px; padding: 4px;" value="2.0" step="0.25"></td>
+                                <td><input type="number" style="width: 60px; padding: 4px;" placeholder="-" step="0.25"></td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Save</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-002</td>
+                                <td>Maria Garcia</td>
+                                <td>CS201 - Data Structures</td>
+                                <td>CS-2A</td>
+                                <td><input type="number" style="width: 60px; padding: 4px;" value="1.75" step="0.25"></td>
+                                <td><input type="number" style="width: 60px; padding: 4px;" placeholder="-" step="0.25"></td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Save</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Schedules -->
+            <div class="content-section" id="schedules">
+                <div class="page-header">
+                    <h1 class="page-title">Class Schedule Management</h1>
+                    <p class="page-subtitle">Manage room assignments and schedules</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>📅 Class Schedules</span>
+                        <button class="btn btn-primary">Add Schedule</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Section</th>
+                                <th>Instructor</th>
+                                <th>Room</th>
+                                <th>Schedule</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CS201 - Data Structures</td>
+                                <td>CS-2A</td>
+                                <td>Dr. Maria Santos</td>
+                                <td>EB-201</td>
+                                <td>Mon, Wed 9:00-10:30 AM</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CS202 - Database Systems</td>
+                                <td>CS-2B</td>
+                                <td>Prof. John Reyes</td>
+                                <td>EB-305</td>
+                                <td>Tue, Thu 10:30-12:00 PM</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Student Records -->
+            <div class="content-section" id="students">
+                <div class="page-header">
+                    <h1 class="page-title">Student Records</h1>
+                    <p class="page-subtitle">View and manage student information</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">👨‍🎓 All Students</h2>
+
+                    <input type="text" class="search-bar" placeholder="🔍 Search by name, student ID, or program...">
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program</th>
+                                <th>Year Level</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>BSCS</td>
+                                <td>2nd Year</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View Profile</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-002</td>
+                                <td>Maria Garcia</td>
+                                <td>BSCS</td>
+                                <td>2nd Year</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View Profile</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="content-section" id="feedback">
+                <div class="page-header">
+                    <h1 class="page-title">Student Inquiries</h1>
+                    <p class="page-subtitle">Respond to student questions and feedback</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">💬 Pending Inquiries</h2>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Type</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juan Dela Cruz</td>
+                                <td><span class="badge badge-info">Question</span></td>
+                                <td>Enrollment Verification Status</td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Respond</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Maria Garcia</td>
+                                <td><span class="badge badge-warning">Complaint</span></td>
+                                <td>Grade Posting Delay</td>
+                                <td>5 hours ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Respond</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/dashboard-registrar.js"></script>
+</body>
+</html>

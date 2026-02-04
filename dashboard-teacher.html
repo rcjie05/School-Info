@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - School Info System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-teacher.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">School Info</div>
+                <div class="sidebar-user">Dr. Maria Santos - Faculty</div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-page="overview">
+                    <span>📊</span>
+                    <span>Overview</span>
+                </div>
+                <div class="menu-item" data-page="classes">
+                    <span>📚</span>
+                    <span>My Classes</span>
+                </div>
+                <div class="menu-item" data-page="schedule">
+                    <span>📅</span>
+                    <span>Schedule</span>
+                </div>
+                <div class="menu-item" data-page="office">
+                    <span>🏢</span>
+                    <span>Office Information</span>
+                </div>
+                <div class="menu-item" data-page="announcements">
+                    <span>📢</span>
+                    <span>Announcements</span>
+                </div>
+                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+                    <span>🗺️</span>
+                    <span>Floor Plan</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Overview -->
+            <div class="content-section active" id="overview">
+                <div class="page-header">
+                    <h1 class="page-title">Welcome, Dr. Santos!</h1>
+                    <p class="page-subtitle">Here's your teaching overview for this semester</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dbeafe; color: #1e40af;">📚</div>
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Active Classes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #15803d;">👨‍🎓</div>
+                        <div class="stat-value">156</div>
+                        <div class="stat-label">Total Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #92400e;">⏰</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">Hours/Week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fce7f3; color: #9f1239;">🏢</div>
+                        <div class="stat-value">EB-301</div>
+                        <div class="stat-label">Office Room</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📚 Today's Classes</h2>
+
+                    <div class="class-card">
+                        <div class="class-code">CS201</div>
+                        <div class="class-name">Data Structures &amp; Algorithms</div>
+                        <div class="class-info">
+                            <span>⏰ 9:00 AM - 10:30 AM</span>
+                            <span>🚪 EB-201</span>
+                            <span>👥 42 students</span>
+                        </div>
+                    </div>
+
+                    <div class="class-card" style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);">
+                        <div class="class-code">CS301</div>
+                        <div class="class-name">Software Engineering</div>
+                        <div class="class-info">
+                            <span>⏰ 1:00 PM - 2:30 PM</span>
+                            <span>🚪 EB-203</span>
+                            <span>👥 38 students</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="office-info">
+                    <div class="office-title">📍 Office Hours Today</div>
+                    <div class="office-detail">Monday &amp; Wednesday: 3:00 PM - 5:00 PM</div>
+                    <div class="office-detail">Location: Engineering Building, Room 301</div>
+                </div>
+            </div>
+
+            <!-- My Classes -->
+            <div class="content-section" id="classes">
+                <div class="page-header">
+                    <h1 class="page-title">My Classes</h1>
+                    <p class="page-subtitle">Second Semester, SY 2025-2026</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">CS201 - Data Structures &amp; Algorithms</h2>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">Section: CS-2A | Schedule: Mon, Wed 9:00 AM - 10:30 AM | Room: EB-201</p>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program</th>
+                                <th>Midterm</th>
+                                <th>Final</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>BSCS</td>
+                                <td>2.0</td>
+                                <td>-</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-002</td>
+                                <td>Maria Garcia</td>
+                                <td>BSCS</td>
+                                <td>1.75</td>
+                                <td>-</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-003</td>
+                                <td>Pedro Santos</td>
+                                <td>BSCS</td>
+                                <td>2.25</td>
+                                <td>-</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">CS202 - Database Management Systems</h2>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">Section: CS-2B | Schedule: Tue, Thu 10:30 AM - 12:00 PM | Room: EB-305</p>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program</th>
+                                <th>Midterm</th>
+                                <th>Final</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-010</td>
+                                <td>Ana Reyes</td>
+                                <td>BSCS</td>
+                                <td>2.0</td>
+                                <td>-</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-011</td>
+                                <td>Carlos Mendoza</td>
+                                <td>BSCS</td>
+                                <td>1.5</td>
+                                <td>-</td>
+                                <td><span class="badge badge-success">Enrolled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Schedule -->
+            <div class="content-section" id="schedule">
+                <div class="page-header">
+                    <h1 class="page-title">Teaching Schedule</h1>
+                    <p class="page-subtitle">Weekly class schedule</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📅 This Week</h2>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Section</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Room</th>
+                                <th>Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CS201</strong> - Data Structures</td>
+                                <td>CS-2A</td>
+                                <td>Mon, Wed</td>
+                                <td>9:00 AM - 10:30 AM</td>
+                                <td>EB-201</td>
+                                <td>42</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CS202</strong> - Database Systems</td>
+                                <td>CS-2B</td>
+                                <td>Tue, Thu</td>
+                                <td>10:30 AM - 12:00 PM</td>
+                                <td>EB-305</td>
+                                <td>38</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CS301</strong> - Software Engineering</td>
+                                <td>CS-3A</td>
+                                <td>Mon, Wed</td>
+                                <td>1:00 PM - 2:30 PM</td>
+                                <td>EB-203</td>
+                                <td>35</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CS401</strong> - AI Fundamentals</td>
+                                <td>CS-4A</td>
+                                <td>Tue, Thu</td>
+                                <td>2:30 PM - 4:00 PM</td>
+                                <td>EB-201</td>
+                                <td>41</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Office Information -->
+            <div class="content-section" id="office">
+                <div class="page-header">
+                    <h1 class="page-title">Office Information</h1>
+                    <p class="page-subtitle">Location and consultation hours</p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">📍 Office Location</h2>
+                    <div class="office-info">
+                        <div class="office-detail"><strong>Building:</strong> Engineering Building (EB)</div>
+                        <div class="office-detail"><strong>Room Number:</strong> 301</div>
+                        <div class="office-detail"><strong>Floor:</strong> 3rd Floor</div>
+                        <div class="office-detail"><strong>Department:</strong> Computer Science</div>
+                    </div>
+
+                    <h2 class="card-title">⏰ Office Hours</h2>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monday</td>
+                                <td>3:00 PM - 5:00 PM</td>
+                                <td>Walk-in Consultation</td>
+                            </tr>
+                            <tr>
+                                <td>Wednesday</td>
+                                <td>3:00 PM - 5:00 PM</td>
+                                <td>Walk-in Consultation</td>
+                            </tr>
+                            <tr>
+                                <td>Friday</td>
+                                <td>2:00 PM - 4:00 PM</td>
+                                <td>By Appointment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 class="card-title" style="margin-top: 30px;">📧 Contact Information</h2>
+                    <div class="office-detail"><strong>Email:</strong> m.santos@school.edu</div>
+                    <div class="office-detail"><strong>Phone:</strong> (032) 123-4567</div>
+                    <div class="office-detail"><strong>Department:</strong> cs@school.edu</div>
+                </div>
+            </div>
+
+            <!-- Announcements -->
+            <div class="content-section" id="announcements">
+                <div class="page-header">
+                    <h1 class="page-title">Announcements</h1>
+                    <p class="page-subtitle">Latest updates from administration</p>
+                </div>
+
+                <div class="card">
+                    <div style="padding: 18px; border-left: 4px solid var(--primary); background: var(--bg-main); border-radius: 8px; margin-bottom: 16px;">
+                        <div style="font-weight: 600; margin-bottom: 6px;">📅 Faculty Meeting - February 10, 2026</div>
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Monthly faculty meeting scheduled for next week. Attendance is mandatory. Topics include curriculum updates and semester planning.</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Posted 2 hours ago by Admin</div>
+                    </div>
+
+                    <div style="padding: 18px; border-left: 4px solid var(--accent); background: var(--bg-main); border-radius: 8px; margin-bottom: 16px;">
+                        <div style="font-weight: 600; margin-bottom: 6px;">📝 Grade Submission Deadline - February 25</div>
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Please submit all midterm grades by February 25, 2026. Late submissions will require special approval.</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Posted 1 day ago by Registrar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/dashboard-teacher.js"></script>
+</body>
+</html>
