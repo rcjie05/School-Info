@@ -29,51 +29,99 @@ body {
     color: var(--text-primary);
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('../images/scclogo.png');
+    background-repeat: no-repeat;
+    background-position: 70% center;
+    background-size: contain;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -2;
+}
+
 /* Layout */
 .dashboard {
     display: flex;
     min-height: 100vh;
 }
 
-/* Sidebar (red accent on active/hover) */
+/* Sidebar */
 .sidebar {
     width: 280px;
-    background: #fff;
+    background: #e98484;
     border-right: 1px solid var(--border);
-    padding: 32px 20px;
+    padding: 24px 16px;                /* slightly reduced padding */
     position: fixed;
-    height: 100%;
-    overflow-y: auto;
+    height: 100vh;
+    overflow-y: hidden;                /* no scrollbar by default */
     box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(220,38,38,0.25) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(220, 38, 38, 0.25);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(220, 38, 38, 0.45);
 }
 
 .sidebar-header {
-    margin-bottom: 48px;
+    text-align: center;
+    margin-bottom: 28px;               /* reduced vertical space */
 }
 
-.sidebar-logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--primary);
+.sidebar-logo-container {
+    margin-bottom: 16px;
+}
+
+.sidebar-school-logo {
+    width: 100px;                      /* balanced size for registrar theme */
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid rgba(220, 38, 38, 0.18);
+    box-shadow: 0 6px 20px rgba(220,38,38,0.25);
+    background: white;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-school-logo:hover {
+    transform: scale(1.06);
 }
 
 .sidebar-user {
     font-size: 14px;
-    color: var(--text-secondary);
-    margin-top: 8px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 6px;
 }
 
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;                          /* tighter spacing */
+    margin-top: 12px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 14px 20px;
+    padding: 12px 18px;                /* slightly smaller padding */
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s;
@@ -94,6 +142,8 @@ body {
     margin-left: 280px;
     flex: 1;
     padding: 40px 48px;
+    background: rgba(254, 249, 248, 0.82);   /* subtle overlay to blend with watermark */
+    min-height: 100vh;
 }
 
 /* Page Header */
@@ -194,7 +244,7 @@ body {
     font-weight: 600;
 }
 
-/* Cards & Tables (shared across pages) */
+/* Cards & Tables */
 .card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -213,7 +263,7 @@ body {
     gap: 16px;
 }
 
-/* Search Bar (used in multiple pages) */
+/* Search Bar */
 .search-bar {
     width: 100%;
     padding: 14px 20px 14px 52px;
@@ -274,6 +324,7 @@ body {
         height: auto;
         position: relative;
         padding: 20px;
+        overflow-y: visible;
     }
     .main-content {
         margin-left: 0;
@@ -282,5 +333,12 @@ body {
     .stats-grid,
     .quick-actions {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .sidebar-school-logo {
+        width: 90px;
+        height: 90px;
+    }
+    .sidebar-header {
+        margin-bottom: 24px;
     }
 }

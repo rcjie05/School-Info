@@ -13,7 +13,13 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-logo">School Info</div>
+                <div class="sidebar-logo-container">
+                    <img 
+                        src="../images/logoscc.png" 
+                        alt="St. Cecilia's College - Cebu" 
+                        class="sidebar-school-logo"
+                    >
+                </div>
                 <div class="sidebar-user">Dr. Maria Santos - Faculty</div>
             </div>
 
@@ -25,6 +31,10 @@
                 <div class="menu-item" data-page="classes">
                     <span>📚</span>
                     <span>My Classes</span>
+                </div>
+                <div class="menu-item" data-page="students">
+                    <span>👨‍🎓</span>
+                    <span>List of Students</span>
                 </div>
                 <div class="menu-item" data-page="schedule">
                     <span>📅</span>
@@ -87,7 +97,7 @@
 
                     <div class="class-card">
                         <div class="class-code">CS201</div>
-                        <div class="class-name">Data Structures &amp; Algorithms</div>
+                        <div class="class-name">Data Structures & Algorithms</div>
                         <div class="class-info">
                             <span>⏰ 9:00 AM - 10:30 AM</span>
                             <span>🚪 EB-201</span>
@@ -108,7 +118,7 @@
 
                 <div class="office-info">
                     <div class="office-title">📍 Office Hours Today</div>
-                    <div class="office-detail">Monday &amp; Wednesday: 3:00 PM - 5:00 PM</div>
+                    <div class="office-detail">Monday & Wednesday: 3:00 PM - 5:00 PM</div>
                     <div class="office-detail">Location: Engineering Building, Room 301</div>
                 </div>
             </div>
@@ -121,7 +131,7 @@
                 </div>
 
                 <div class="card">
-                    <h2 class="card-title">CS201 - Data Structures &amp; Algorithms</h2>
+                    <h2 class="card-title">CS201 - Data Structures & Algorithms</h2>
                     <p style="margin-bottom: 20px; color: var(--text-secondary);">Section: CS-2A | Schedule: Mon, Wed 9:00 AM - 10:30 AM | Room: EB-201</p>
 
                     <table class="schedule-table">
@@ -199,6 +209,139 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <!-- List of Students – Grouped by Section -->
+            <div class="content-section" id="students">
+                <div class="page-header">
+                    <h1 class="page-title">List of Students</h1>
+                    <p class="page-subtitle">Grouped by class section – Second Semester, SY 2025-2026</p>
+                </div>
+
+                <!-- Global Search -->
+                <div class="card" style="margin-bottom: 32px;">
+                    <div class="card-title">
+                        <span>🔍 Quick Search</span>
+                        <input type="text" class="search-bar" placeholder="Search by name, ID or section..." id="studentSearch" style="width: 350px; margin-left: auto;">
+                    </div>
+                </div>
+
+                <!-- CS-2A (CS201) -->
+                <div class="card">
+                    <h2 class="card-title">
+                        CS201 - Data Structures & Algorithms 
+                        <span style="font-size: 16px; color: var(--text-secondary); margin-left: 16px;">
+                            (Section CS-2A | Room EB-201 | 42 students)
+                        </span>
+                    </h2>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program / Year</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>BSCS - 2nd Year</td>
+                                <td>juan@school.edu</td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-002</td>
+                                <td>Maria Garcia</td>
+                                <td>BSCS - 2nd Year</td>
+                                <td>maria@school.edu</td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-003</td>
+                                <td>Pedro Santos</td>
+                                <td>BSCS - 2nd Year</td>
+                                <td>pedro@school.edu</td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CS-2B (CS202) -->
+                <div class="card">
+                    <h2 class="card-title">
+                        CS202 - Database Management Systems 
+                        <span style="font-size: 16px; color: var(--text-secondary); margin-left: 16px;">
+                            (Section CS-2B | Room EB-305 | 38 students)
+                        </span>
+                    </h2>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program / Year</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-CS-010</td>
+                                <td>Ana Reyes</td>
+                                <td>BSCS - 2nd Year</td>
+                                <td>ana@school.edu</td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-CS-011</td>
+                                <td>Carlos Mendoza</td>
+                                <td>BSCS - 2nd Year</td>
+                                <td>carlos@school.edu</td>
+                                <td><button class="btn btn-sm btn-primary">View</button></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CS-3A (CS301) – Example -->
+                <div class="card">
+                    <h2 class="card-title">
+                        CS301 - Software Engineering 
+                        <span style="font-size: 16px; color: var(--text-secondary); margin-left: 16px;">
+                            (Section CS-3A | Room EB-203 | 35 students)
+                        </span>
+                    </h2>
+
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Program / Year</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example placeholder row -->
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 20px;">
+                                    Add your students here...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add more class sections here if needed -->
             </div>
 
             <!-- Schedule -->

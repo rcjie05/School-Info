@@ -11,51 +11,61 @@
 <body>
     <div class="dashboard">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">School Info</div>
-                <div class="sidebar-user">Juan Dela Cruz - CS-2024-001</div>
-            </div>
-
-            <div class="sidebar-menu">
-                <div class="menu-item active" data-page="overview">
-                    <span class="menu-icon">📊</span>
-                    <span class="menu-text">Overview</span>
-                </div>
-                <div class="menu-item" data-page="map">
-                    <span class="menu-icon">🗺️</span>
-                    <span class="menu-text">Campus Map</span>
-                </div>
-                <div class="menu-item" data-page="schedule">
-                    <span class="menu-icon">📅</span>
-                    <span class="menu-text">My Schedule</span>
-                </div>
-                <div class="menu-item" data-page="grades">
-                    <span class="menu-icon">📝</span>
-                    <span class="menu-text">Grades</span>
-                </div>
-                <div class="menu-item" data-page="faculty">
-                    <span class="menu-icon">👥</span>
-                    <span class="menu-text">Faculty Directory</span>
-                </div>
-                <div class="menu-item" data-page="announcements">
-                    <span class="menu-icon">📢</span>
-                    <span class="menu-text">Announcements</span>
-                </div>
-                <div class="menu-item" data-page="feedback">
-                    <span class="menu-icon">💬</span>
-                    <span class="menu-text">Feedback</span>
-                </div>
-                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
-                    <span class="menu-icon">🗺️</span>
-                    <span class="menu-text">Floor Plan</span>
-                </div>
-                <div class="menu-item" onclick="logout()">
-                    <span class="menu-icon">🚪</span>
-                    <span class="menu-text">Logout</span>
-                </div>
-            </div>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo-container">
+            <img 
+                src="../images/logoscc.png"
+                alt="St. Cecilia's College - Cebu" 
+                class="sidebar-school-logo"
+            >
         </div>
+        <div class="sidebar-user">Juan Dela Cruz - CS-2024-001</div>
+    </div>
+
+    <div class="sidebar-menu">
+        <div class="menu-item active" data-page="overview">
+            <span class="menu-icon">📊</span>
+            <span class="menu-text">Overview</span>
+        </div>
+        <div class="menu-item" data-page="map">
+            <span class="menu-icon">🗺️</span>
+            <span class="menu-text">Campus Map</span>
+        </div>
+        <div class="menu-item" data-page="schedule">
+            <span class="menu-icon">📅</span>
+            <span class="menu-text">My Schedule</span>
+        </div>
+        <div class="menu-item" data-page="study-load">
+            <span class="menu-icon">📋</span>
+            <span class="menu-text">Study Load</span>
+        </div>
+        <div class="menu-item" data-page="grades">
+            <span class="menu-icon">📝</span>
+            <span class="menu-text">Grades</span>
+        </div>
+        <div class="menu-item" data-page="faculty">
+            <span class="menu-icon">👥</span>
+            <span class="menu-text">Faculty Directory</span>
+        </div>
+        <div class="menu-item" data-page="announcements">
+            <span class="menu-icon">📢</span>
+            <span class="menu-text">Announcements</span>
+        </div>
+        <div class="menu-item" data-page="feedback">
+            <span class="menu-icon">💬</span>
+            <span class="menu-text">Feedback</span>
+        </div>
+        <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+            <span class="menu-icon">🗺️</span>
+            <span class="menu-text">Floor Plan</span>
+        </div>
+        <div class="menu-item" onclick="logout()">
+            <span class="menu-icon">🚪</span>
+            <span class="menu-text">Logout</span>
+        </div>
+    </div>
+</div>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -70,13 +80,13 @@
     <!-- Stats row like reference -->
     <div class="stats-row">
         <div class="stat-box">
-            <div class="stat-number">6</div>
-            <div class="stat-label">Enrolled Subjects</div>
-        </div>
-        <div class="stat-box">
             <div class="stat-number">Enrolled</div>
             <div class="stat-label">Status</div>
         </div>
+        <div class="stat-box">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Enrolled Subjects</div>
+        </div>       
         <div class="stat-box">
             <div class="stat-number">2.15</div>
             <div class="stat-label">Current GPA</div>
@@ -301,6 +311,103 @@
                     </table>
                 </div>
             </div>
+            <!-- Study Load Page -->
+<div class="content-section" id="study-load">
+    <div class="page-header">
+        <h1 class="page-title">My Study Load</h1>
+        <p class="page-subtitle">Current semester enrolled subjects and units – Second Semester, SY 2025-2026</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <span>📋 Enrolled Subjects</span>
+            <span style="font-size: 16px; color: var(--text-secondary); margin-left: auto;">
+                Total Units: 17 | Status: Regular Load
+            </span>
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Units</th>
+                    <th>Section</th>
+                    <th>Schedule</th>
+                    <th>Room</th>
+                    <th>Instructor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="subject-code">CS201</span></td>
+                    <td>Data Structures & Algorithms</td>
+                    <td>3</td>
+                    <td>CS-2A</td>
+                    <td>Mon, Wed 9:00 AM - 10:30 AM</td>
+                    <td>EB-201</td>
+                    <td>Dr. Maria Santos</td>
+                </tr>
+                <tr>
+                    <td><span class="subject-code">CS202</span></td>
+                    <td>Database Management Systems</td>
+                    <td>3</td>
+                    <td>CS-2B</td>
+                    <td>Tue, Thu 10:30 AM - 12:00 PM</td>
+                    <td>EB-305</td>
+                    <td>Prof. John Reyes</td>
+                </tr>
+                <tr>
+                    <td><span class="subject-code">MATH301</span></td>
+                    <td>Discrete Mathematics</td>
+                    <td>3</td>
+                    <td>MATH-3A</td>
+                    <td>Mon, Wed, Fri 1:00 PM - 2:00 PM</td>
+                    <td>MB-201</td>
+                    <td>Dr. Ana Cruz</td>
+                </tr>
+                <tr>
+                    <td><span class="subject-code">CS203</span></td>
+                    <td>Web Development</td>
+                    <td>3</td>
+                    <td>CS-2A (Lab)</td>
+                    <td>Tue, Thu 2:00 PM - 3:30 PM</td>
+                    <td>EB-102 (Lab)</td>
+                    <td>Mr. Pedro Garcia</td>
+                </tr>
+                <tr>
+                    <td><span class="subject-code">PE102</span></td>
+                    <td>Physical Education 2</td>
+                    <td>2</td>
+                    <td>PE-2A</td>
+                    <td>Friday 3:30 PM - 5:00 PM</td>
+                    <td>SC-GYM</td>
+                    <td>Coach Alex Tan</td>
+                </tr>
+                <tr>
+                    <td><span class="subject-code">NSTP102</span></td>
+                    <td>National Service Training Program 2</td>
+                    <td>3</td>
+                    <td>NSTP-2A</td>
+                    <td>Saturday 8:00 AM - 12:00 PM</td>
+                    <td>MB-101</td>
+                    <td>Ms. Lisa Mendoza</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 24px; padding: 16px; background: rgba(4,120,87,0.05); border-radius: 12px; text-align: center;">
+            <strong style="color: var(--primary);">Total Units Enrolled:</strong> 17 units (within regular load limit)
+        </div>
+    </div>
+
+    <!-- Optional: Previous Semester Summary -->
+    <div class="card" style="margin-top: 32px;">
+        <h2 class="card-title">Previous Semester Load (First Sem 2025-2026)</h2>
+        <p style="color: var(--text-secondary);">Total Units: 15 | Status: Completed</p>
+        <!-- You can add a small summary table here if needed -->
+    </div>
+</div>
 
             <!-- Grades Page -->
             <div class="content-section" id="grades">

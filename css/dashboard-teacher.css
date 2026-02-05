@@ -4,15 +4,15 @@
 
 :root {
     --primary:       #047857;           /* darker emerald green */
-    --primary-light: #059669;           /* still fresh but deeper */
-    --primary-dark:  #034e3e;           /* rich dark base */
-    --accent:        #f59e0b;           /* amber for highlights */
+    --primary-light: #059669;
+    --primary-dark:  #034e3e;
+    --accent:        #f59e0b;
     --success:       #059669;
     --warning:       #f59e0b;
     --info:          #3b82f6;
     --bg-main:       #f8faf9;
     --card-bg:       white;
-    --border:        #a7f3d0;           /* softer green border */
+    --border:        #a7f3d0;
     --text-primary:  #1f2937;
     --text-secondary:#4b5563;
     --shadow-sm:     0 4px 16px rgba(4,120,87,0.10);
@@ -29,6 +29,19 @@ body {
     color: var(--text-primary);
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('../images/scclogo.png');
+    background-repeat: no-repeat;
+    background-position: 70% center;
+    background-size: contain;
+    opacity: 1;
+    pointer-events: none;
+    z-index: -2;
+}
+
 /* Layout */
 .dashboard {
     display: flex;
@@ -38,42 +51,77 @@ body {
 /* Sidebar */
 .sidebar {
     width: 280px;
-    background: white;
+    background: rgb(96, 219, 80);
     border-right: 1px solid var(--border);
-    padding: 32px 20px;
+    padding: 24px 16px;
     position: fixed;
-    height: 100%;
-    overflow-y: auto;
+    height: 100vh;
+    overflow-y: hidden;
     box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(4,120,87,0.25) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(4, 120, 87, 0.25);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(4, 120, 87, 0.45);
 }
 
 .sidebar-header {
-    margin-bottom: 48px;
+    text-align: center;
+    margin-bottom: 28px;
 }
 
-.sidebar-logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--primary);
+.sidebar-logo-container {
+    margin-bottom: 16px;
+}
+
+.sidebar-school-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid rgba(4, 120, 87, 0.18);
+    box-shadow: 0 6px 20px rgba(4,120,87,0.25);
+    background: white;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-school-logo:hover {
+    transform: scale(1.06);
 }
 
 .sidebar-user {
     font-size: 14px;
-    color: var(--text-secondary);
-    margin-top: 8px;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-top: 6px;
 }
 
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    margin-top: 12px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 14px 20px;
+    padding: 12px 18px;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s;
@@ -94,6 +142,8 @@ body {
     margin-left: 280px;
     flex: 1;
     padding: 40px 48px;
+    background: rgba(248, 250, 249, 0.88);
+    min-height: 100vh;
 }
 
 /* Page Header */
@@ -123,18 +173,18 @@ body {
 }
 
 .stat-card {
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.78);
     border-radius: var(--radius);
     padding: 24px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 3px 12px rgba(4,120,87,0.08);
     text-align: center;
     transition: all 0.25s;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(167, 243, 208, 0.35);
 }
 
 .stat-card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(4,120,87,0.12);
 }
 
 .stat-icon {
@@ -207,12 +257,12 @@ body {
 
 /* Office Info Banner */
 .office-info {
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    background: linear-gradient(135deg, rgba(236, 253, 245, 0.85) 0%, rgba(209, 250, 229, 0.85) 100%);
     border-radius: var(--radius);
     padding: 28px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 3px 12px rgba(4,120,87,0.08);
     margin-bottom: 40px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(167, 243, 208, 0.4);
 }
 
 .office-title {
@@ -234,20 +284,39 @@ body {
     color: var(--primary-dark);
 }
 
-/* Cards & Tables */
+/* General Cards */
 .card {
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.82);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 3px 12px rgba(4,120,87,0.08);
     padding: 28px;
     margin-bottom: 40px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(167, 243, 208, 0.4);
 }
 
 .card-title {
     font-size: 22px;
     margin: 0 0 24px;
     color: var(--primary-dark);
+}
+
+/* Enhanced student list headers */
+#students .card-title {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px 12px 0 0;
+    margin: -28px -28px 20px -28px;
+}
+
+#students .card-title span:first-child {
+    font-size: 20px;
+}
+
+#students .card-title span:last-child {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-left: 12px;
 }
 
 /* Responsive */
@@ -262,10 +331,18 @@ body {
         height: auto;
         position: relative;
         padding: 20px;
+        overflow-y: visible;
     }
     .main-content {
         margin-left: 0;
         padding: 24px 20px;
+    }
+    .sidebar-school-logo {
+        width: 90px;
+        height: 90px;
+    }
+    .sidebar-header {
+        margin-bottom: 24px;
     }
 }
 

@@ -23,19 +23,38 @@
     --radius:         16px;
 }
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     background: var(--bg-main);
     color: var(--text-primary);
+    position: relative;
+    min-height: 100vh;
 }
 
-/* Layout */
+/* Subtle watermark background using the school logo */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url('../images/scclogo.png');
+    background-repeat: no-repeat;
+    background-position: 70% center;
+    background-size: contain;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -2;
+}
+
 .dashboard {
     display: flex;
     min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
 
 /* Sidebar */
@@ -43,41 +62,77 @@ body {
     width: 280px;
     background: var(--sidebar-bg);
     color: var(--sidebar-text);
-    padding: 32px 20px;
+    padding: 24px 16px;                /* reduced padding slightly */
     position: fixed;
-    height: 100%;
-    overflow-y: auto;
+    height: 100vh;                     /* more reliable than 100% */
+    overflow-y: hidden;                /* ← main fix: no scrollbar unless absolutely needed */
     box-shadow: 2px 0 20px rgba(0,0,0,0.25);
+    z-index: 10;
+}
+
+/* Thin scrollbar styling (only appears if content overflows) */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.45);
 }
 
 .sidebar-header {
-    margin-bottom: 48px;
+    text-align: center;
+    margin-bottom: 28px;               /* reduced from 40px+ */
+    padding: 0 8px;
 }
 
-.sidebar-logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -1px;
+.sidebar-logo-container {
+    margin-bottom: 16px;
+}
+
+.sidebar-school-logo {
+    width: 100px;                      /* slightly smaller to save vertical space */
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background: white;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-school-logo:hover {
+    transform: scale(1.06);
 }
 
 .sidebar-user {
     font-size: 14px;
-    opacity: 0.8;
-    margin-top: 8px;
+    opacity: 0.85;
+    color: #d1c4ff;
+    margin-top: 6px;
+    font-weight: 500;
 }
 
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;                          /* reduced gap from 8px */
+    margin-top: 12px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 14px 20px;
+    padding: 12px 18px;                /* slightly smaller padding */
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.25s;
@@ -97,7 +152,8 @@ body {
     margin-left: 280px;
     flex: 1;
     padding: 40px 48px;
-    background: var(--bg-main);
+    background: transparent;
+    min-height: 100vh;
 }
 
 /* Page Header */
@@ -118,7 +174,7 @@ body {
     margin: 0;
 }
 
-/* Stats Cards Row (horizontal colorful like reference) */
+/* Stats Cards Row */
 .stats-row {
     display: flex;
     gap: 20px;
@@ -144,10 +200,10 @@ body {
     transform: translateY(-6px);
 }
 
-.stat-card:nth-child(1) { border-left-color: var(--info);    } /* Schools */
-.stat-card:nth-child(2) { border-left-color: var(--success); } /* Teachers */
-.stat-card:nth-child(3) { border-left-color: var(--accent);  } /* Students */
-.stat-card:nth-child(4) { border-left-color: #ec4899;        } /* Parents */
+.stat-card:nth-child(1) { border-left-color: var(--info);    }
+.stat-card:nth-child(2) { border-left-color: var(--success); }
+.stat-card:nth-child(3) { border-left-color: var(--accent);  }
+.stat-card:nth-child(4) { border-left-color: #ec4899;        }
 
 .stat-icon {
     font-size: 42px;
@@ -214,7 +270,7 @@ body {
     font-weight: 700;
 }
 
-/* Educational Stage Bar Chart (simple CSS bars) */
+/* Educational Stage Bar Chart */
 .chart-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -291,7 +347,7 @@ body {
     border-bottom: none;
 }
 
-/* Cards & Tables (for other sections) */
+/* General Cards & Tables */
 .card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -323,10 +379,18 @@ body {
         height: auto;
         position: relative;
         padding: 20px;
+        overflow-y: visible;           /* no scrollbar on mobile collapsed sidebar */
     }
     .main-content {
         margin-left: 0;
         padding: 24px 20px;
+    }
+    .sidebar-school-logo {
+        width: 90px;
+        height: 90px;
+    }
+    .sidebar-header {
+        margin-bottom: 24px;
     }
 }
 

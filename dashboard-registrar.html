@@ -11,47 +11,53 @@
 <body>
     <div class="dashboard">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">School Info</div>
-                <div class="sidebar-user">Registrar Office</div>
-            </div>
-
-            <div class="sidebar-menu">
-                <div class="menu-item active" data-page="overview">
-                    <span>📊</span>
-                    <span>Dashboard</span>
-                </div>
-                <div class="menu-item" data-page="enrollments">
-                    <span>📝</span>
-                    <span>Enrollments</span>
-                </div>
-                <div class="menu-item" data-page="grades">
-                    <span>📊</span>
-                    <span>Grade Management</span>
-                </div>
-                <div class="menu-item" data-page="schedules">
-                    <span>📅</span>
-                    <span>Class Schedules</span>
-                </div>
-                <div class="menu-item" data-page="students">
-                    <span>👨‍🎓</span>
-                    <span>Student Records</span>
-                </div>
-                <div class="menu-item" data-page="feedback">
-                    <span>💬</span>
-                    <span>Inquiries</span>
-                </div>
-                <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
-                    <span>🗺️</span>
-                    <span>Floor Plan</span>
-                </div>
-                <div class="menu-item" onclick="logout()">
-                    <span>🚪</span>
-                    <span>Logout</span>
-                </div>
-            </div>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo-container">
+            <img 
+                src="../images/logoscc.png" 
+                alt="St. Cecilia's College - Cebu" 
+                class="sidebar-school-logo"
+            >
         </div>
+        <div class="sidebar-user">Registrar Office</div>
+    </div>
+
+    <div class="sidebar-menu">
+        <div class="menu-item active" data-page="overview">
+            <span>📊</span>
+            <span>Dashboard</span>
+        </div>
+        <div class="menu-item" data-page="enrollments">
+            <span>📝</span>
+            <span>Enrollments</span>
+        </div>
+        <div class="menu-item" data-page="grades">
+            <span>📊</span>
+            <span>Grade Management</span>
+        </div>
+        <div class="menu-item" data-page="schedules">
+            <span>📅</span>
+            <span>Class Schedules</span>
+        </div>
+        <div class="menu-item" data-page="students">
+            <span>👨‍🎓</span>
+            <span>Student Records</span>
+        </div>
+        <div class="menu-item" data-page="feedback">
+            <span>💬</span>
+            <span>Inquiries</span>
+        </div>
+        <div class="menu-item" data-page="floor-plan" data-link="floor-plan.html">
+            <span>🗺️</span>
+            <span>Floor Plan</span>
+        </div>
+        <div class="menu-item" onclick="logout()">
+            <span>🚪</span>
+            <span>Logout</span>
+        </div>
+    </div>
+</div>
 
         <!-- Main Content -->
         <div class="main-content">
