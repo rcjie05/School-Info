@@ -17,30 +17,24 @@
         <form id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-input" id="username" value="admin" required>
+                <input type="text" class="form-input" id="username" value="" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="password" value="admin123" required>
+                <input type="password" class="form-input" id="password" value="" required>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Login As</label>
-                <select class="form-select" id="role">
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="registrar">Registrar</option>
-                    <option value="admin" selected>Administrator</option>
-                </select>
+            <div style="text-align: right; margin-top: -0.5rem; margin-bottom: 1rem;">
+                <a href="forgot-password.html" style="color: #3498db; text-decoration: none; font-size: 0.9rem;">Forgot Password?</a>
             </div>
 
             <button type="submit" class="btn">Sign In</button>
         </form>
 
-        <div class="demo-credentials">
-            <strong>📝 Demo Credentials:</strong><br>
-            Username: <code>admin</code> | Password: <code>admin123</code>
+        <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+            <p style="color: #666; margin-bottom: 0.5rem;">Don't have an account?</p>
+            <a href="register.html" style="color: #3498db; text-decoration: none; font-weight: 500;">Create New Account →</a>
         </div>
     </div>
 

@@ -86,3 +86,36 @@ document.getElementById('feedbackForm')?.addEventListener('submit', function (e)
     alert('Thank you for your feedback! Your message has been submitted successfully.');
     this.reset();
 });
+// Logout function – redirects to index.html after successful logout
+function logout() {
+    if (!confirm("Are you sure you want to log out?")) {
+        return;
+    }
+
+    fetch('./api/logout.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+    })
+    .then(data => {
+        // Redirect to index.html after successful logout
+        if (data.success) {
+            window.location.href = "index.html";
+        } else {
+            alert("Server says: " + (data.message || "unknown problem"));
+            // Redirect anyway for safety
+            window.location.href = "index.html";
+        }
+    })
+    .catch(err => {
+        console.error("Logout failed:", err);
+        // Force redirect anyway — better than staying logged in visually
+        window.location.href = "index.html";
+    });
+}

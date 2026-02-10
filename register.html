@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Info System - Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .form-section h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .role-specific {
+            display: none;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .back-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        .password-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        .subtitle {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">School Info System</div>
+        <div class="subtitle">Create New Account</div>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3>👤 Basic Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" id="fullName" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" id="email" required placeholder="your.email@school.edu">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Username *</label>
+                    <input type="text" class="form-input" id="username" required placeholder="Choose a username" minlength="4">
+                    <div class="password-hint">Minimum 4 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" class="form-input" id="password" required placeholder="Create a password" minlength="6">
+                    <div class="password-hint">Minimum 6 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirm Password *</label>
+                    <input type="password" class="form-input" id="confirmPassword" required placeholder="Confirm your password">
+                </div>
+            </div>
+
+            <!-- Role Selection -->
+            <div class="form-section">
+                <h3>🎭 Account Type</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Register As *</label>
+                    <select class="form-select" id="role" onchange="toggleRoleFields()" required>
+                        <option value="">-- Select Account Type --</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="registrar">Registrar</option>
+                        <option value="hr">HR Staff</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Student-Specific Fields -->
+            <div class="form-section role-specific" id="studentFields">
+                <h3>🎓 Student Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Student Number *</label>
+                    <input type="text" class="form-input" id="studentNumber" placeholder="e.g., 2024001">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Program *</label>
+                    <select class="form-select" id="program">
+                        <option value="">-- Select Program --</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Education">Education</option>
+                        <option value="Arts and Sciences">Arts and Sciences</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Year Level *</label>
+                    <select class="form-select" id="yearLevel">
+                        <option value="">-- Select Year --</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                        <option value="5">5th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Section *</label>
+                    <input type="text" class="form-input" id="section" placeholder="e.g., A, B, C">
+                </div>
+            </div>
+
+            <!-- Teacher-Specific Fields -->
+            <div class="form-section role-specific" id="teacherFields">
+                <h3>👨‍🏫 Teacher Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Employee Number *</label>
+                    <input type="text" class="form-input" id="teacherEmployeeNumber" placeholder="e.g., T2024001">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Department *</label>
+                    <select class="form-select" id="teacherDepartment">
+                        <option value="">-- Select Department --</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="English">English</option>
+                        <option value="Business">Business</option>
+                        <option value="Engineering">Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Building</label>
+                    <select class="form-select" id="teacherBuilding">
+                        <option value="">-- Select Building --</option>
+                        <option value="Main Building">Main Building</option>
+                        <option value="Science Building">Science Building</option>
+                        <option value="Engineering Building">Engineering Building</option>
+                        <option value="Library Building">Library Building</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Room</label>
+                    <input type="text" class="form-input" id="teacherRoom" placeholder="e.g., 301">
+                </div>
+            </div>
+
+            <!-- Registrar-Specific Fields -->
+            <div class="form-section role-specific" id="registrarFields">
+                <h3>📋 Registrar Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Employee Number *</label>
+                    <input type="text" class="form-input" id="registrarEmployeeNumber" placeholder="e.g., R2024001">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Building</label>
+                    <select class="form-select" id="registrarBuilding">
+                        <option value="Main Building">Main Building</option>
+                        <option value="Administration Building">Administration Building</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Room</label>
+                    <input type="text" class="form-input" id="registrarRoom" placeholder="e.g., 101">
+                </div>
+            </div>
+
+            <!-- HR-Specific Fields -->
+            <div class="form-section role-specific" id="hrFields">
+                <h3>💼 HR Staff Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Employee Number *</label>
+                    <input type="text" class="form-input" id="hrEmployeeNumber" placeholder="e.g., HR2024001">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Position *</label>
+                    <input type="text" class="form-input" id="hrPosition" placeholder="e.g., HR Manager, Recruitment Officer">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Building</label>
+                    <select class="form-select" id="hrBuilding">
+                        <option value="Main Building">Main Building</option>
+                        <option value="Administration Building">Administration Building</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Office Room</label>
+                    <input type="text" class="form-input" id="hrRoom" placeholder="e.g., 201">
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html">← Back to Login</a>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

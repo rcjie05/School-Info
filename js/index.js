@@ -1,56 +1,54 @@
 /* ============================================================
-   js/index.js — Login / Setup page logic
+   js/index.js — Login page logic
    ============================================================ */
 
-// ----- Test Database Connection -----
-function testConnection() {
-    showAlert('Opening database connection test...', 'success');
-    window.open('test_connection.php', '_blank');
-}
+// Check if user is already logged in
+window.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch('api/check-session.php');
+        const data = await response.json();
+        if (data.logged_in) {
+            // Redirect to appropriate dashboard
+            window.location.href = `dashboard-${data.user.role}.php`;
+        }
+    } catch (error) {
+        console.log('Not logged in');
+    }
+});
 
 // ----- Login Handler -----
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const role      = document.getElementById('role').value;
 
-    // Demo shortcut — works without a database
-    if (username === 'admin' && password === 'admin123') {
-        showAlert('Login successful! Redirecting...', 'success');
-        setTimeout(() => {
-            window.location.href = `dashboard-${role}.html`;
-        }, 1000);
-        return;
-    }
-
-    // Full API login (requires XAMPP + imported schema)
-    fetch('api/login.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, role })
-    })
-    .then(response => response.json())
-    .then(result => {
+    try {
+        const response = await fetch('api/login.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const result = await response.json();
+        
         if (result.success) {
             showAlert('Login successful! Redirecting...', 'success');
             setTimeout(() => {
-                window.location.href = `dashboard-${result.role}.html`;
-            }, 1000);
+                window.location.href = `dashboard-${result.role}.php`;
+            }, 500);
         } else {
-            showAlert(result.message || 'Invalid credentials. Please check database setup.', 'error');
+            showAlert(result.message || 'Invalid credentials', 'error');
         }
-    })
-    .catch(() => {
+    } catch (error) {
         showAlert(
             'Connection error! Please ensure:\n' +
-            '1. XAMPP MySQL is running\n' +
-            '2. Database is imported\n' +
-            '3. Try "Test Database Connection" button above',
+            '1. XAMPP/WAMP/MAMP is running\n' +
+            '2. MySQL server is active\n' +
+            '3. Database schema is imported',
             'error'
         );
-    });
+    }
 }
 
 // ----- Alert Helper -----
@@ -61,15 +59,7 @@ function showAlert(message, type) {
     alert.style.display = 'block';
 
     if (type === 'error') {
-        setTimeout(() => { alert.style.display = 'none'; }, 8000);
+        setTimeout(() => { alert.style.display = 'none'; }, 6000);
     }
 }
 
-// ----- First-Visit Greeting -----
-window.onload = function () {
-    const hasSeenSetup = localStorage.getItem('setup_seen');
-    if (!hasSeenSetup) {
-        showAlert('👋 First time here? Please complete the setup steps above before logging in!', 'success');
-        localStorage.setItem('setup_seen', 'true');
-    }
-};

@@ -141,12 +141,14 @@ body {
     display: none;
 }
 
+.alert.error,
 .alert-error {
     background: #fee;
     color: #c33;
     border: 1px solid #fcc;
 }
 
+.alert.success,
 .alert-success {
     background: #efe;
     color: #3c3;

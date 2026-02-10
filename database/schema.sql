@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    role ENUM('student', 'teacher', 'registrar', 'admin') NOT NULL,
+    role ENUM('student', 'teacher', 'registrar', 'admin', 'hr') NOT NULL,
     full_name VARCHAR(200) NOT NULL,
     status ENUM('active', 'inactive') DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -39,6 +39,18 @@ CREATE TABLE IF NOT EXISTS teachers (
     office_room VARCHAR(50),
     office_building VARCHAR(100),
     office_hours TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- HR Table
+CREATE TABLE IF NOT EXISTS hr_staff (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    employee_number VARCHAR(50) UNIQUE NOT NULL,
+    department VARCHAR(100) DEFAULT 'Human Resources',
+    office_room VARCHAR(50),
+    office_building VARCHAR(100),
+    position VARCHAR(100),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -135,7 +147,7 @@ CREATE TABLE IF NOT EXISTS announcements (
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     posted_by INT NOT NULL,
-    target_audience ENUM('all', 'students', 'teachers', 'registrar') DEFAULT 'all',
+    target_audience ENUM('all', 'students', 'teachers', 'registrar', 'hr') DEFAULT 'all',
     priority ENUM('low', 'medium', 'high', 'urgent') DEFAULT 'medium',
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -169,6 +181,32 @@ CREATE TABLE IF NOT EXISTS audit_logs (
     old_values TEXT,
     new_values TEXT,
     ip_address VARCHAR(45),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Floor Routes Table (for floor plan navigation)
+CREATE TABLE IF NOT EXISTS floor_routes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    start_room VARCHAR(100),
+    end_room VARCHAR(100),
+    waypoints JSON NOT NULL,
+    visible_to_students BOOLEAN DEFAULT TRUE,
+    created_by INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Password Resets Table (for forgot password functionality)
+CREATE TABLE IF NOT EXISTS password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    expires_at DATETIME NOT NULL,
+    used BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );

@@ -1,0 +1,237 @@
+<?php
+require_once 'includes/session.php';
+requireLogin();
+
+$userRole = getUserRole();
+$fullName = getFullName();
+
+// Define role display names
+$roleNames = [
+    'admin' => 'Administrator',
+    'student' => 'Student',
+    'teacher' => 'Teacher',
+    'registrar' => 'Registrar',
+    'hr' => 'HR Staff'
+];
+
+$roleDisplayName = $roleNames[$userRole] ?? 'User';
+
+// Define role permissions
+$canEdit = ($userRole === 'admin');
+$canView = in_array($userRole, ['admin', 'student', 'teacher', 'registrar', 'hr']);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floor Plan Navigator - <?php echo $roleDisplayName; ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/floor-styles.css">
+</head>
+<body>
+
+    <div class="container active" id="mainApp">
+        <div class="header">
+            <div class="header-left">
+                <h1>🗺️ Floor Plan Navigator</h1>
+                <p id="userModeText"><?php echo $roleDisplayName; ?> Mode<?php echo $canEdit ? ' - Full Access' : ' - View Only'; ?></p>
+            </div>
+
+            <div class="user-info">
+                <div class="user-name" id="userName">👤 <?php echo htmlspecialchars($fullName); ?></div>
+                <button class="btn btn-secondary" onclick="window.location.href='dashboard-<?php echo $userRole; ?>.php'" style="margin-left: 10px;">
+                    📊 Dashboard
+                </button>
+            </div>
+        </div>
+
+        <div class="content" id="mainContent">
+            <!-- Left Controls (admin only) -->
+            <div class="controls" <?php echo !$canEdit ? 'style="display: none;"' : ''; ?>>
+                <div class="instruction admin-only">
+                    💡 <strong><span id="instructionText">Tip</span>:</strong> <span id="instructionContent"></span>
+                </div>
+
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="mode-indicator" id="modeIndicator">
+                    ✏️ <strong>Route Drawing Active!</strong> Click on the map to add waypoints to your custom route.
+                </div>
+
+                <div class="control-section admin-only">
+                    <h3>📍 Route Setup</h3>
+                    <select class="room-select" id="startRoom">
+                        <option value="">Select Starting Point</option>
+                    </select>
+                    <select class="room-select" id="endRoom">
+                        <option value="">Select Destination</option>
+                    </select>
+                </div>
+
+                <div class="control-section admin-only">
+                    <h3>🎨 Create Route</h3>
+                    <button class="btn" id="drawRouteBtn" onclick="startDrawingRoute()">
+                        ✏️ Draw Custom Route
+                    </button>
+                    <button class="btn btn-secondary" onclick="findDirectRoute()">
+                        ➡️ Show Direct Route
+                    </button>
+                    <button class="btn btn-success" onclick="completeRoute()">
+                        ✅ Complete Route
+                    </button>
+                </div>
+
+                <div class="control-section admin-only">
+                    <h3>💾 Save Route</h3>
+                    <input type="text" class="input-field" id="routeName" placeholder="Enter route name...">
+                    <textarea class="input-field" id="routeDescription" placeholder="Optional description..." rows="2"></textarea>
+                    
+                    <div class="route-visibility">
+                        <input type="checkbox" id="visibleToStudents" checked>
+                        <label for="visibleToStudents">👁️ Visible to all users</label>
+                    </div>
+                    
+                    <button class="btn btn-warning" onclick="saveRoute()">
+                        💾 Save Current Route
+                    </button>
+                </div>
+
+                <div class="control-section admin-only">
+                    <h3>📋 Route Waypoints</h3>
+                    <div id="waypointList" class="waypoint-list">
+                        <p style="text-align: center; color: var(--gray-500);">No waypoints yet</p>
+                    </div>
+                </div>
+
+                <div class="control-section admin-only">
+                    <h3>🔄 Controls</h3>
+                    <button class="btn btn-clear admin-only" onclick="undoLastWaypoint()">↩️ Undo Last</button>
+                    <button class="btn btn-clear" onclick="clearRoute()">🗑️ Clear Route</button>
+                    <button class="btn btn-clear admin-only" onclick="resetAll()">🔄 Reset All</button>
+                </div>
+
+                <div id="routeInfo" class="route-info" style="display: none;">
+                    <strong>📊 Route Information</strong>
+                    <div id="routeDetails"></div>
+                </div>
+            </div>
+
+            <!-- Center Canvas -->
+            <div class="canvas-container">
+                <canvas id="floorPlan" width="900" height="700"></canvas>
+                
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                    <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⊙</button>
+                    <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                </div>
+                
+                <div class="legend">
+                    <h4>🗺️ Legend</h4>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F4D03F;"></div>
+                        <span>Administrative</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #85C1E2;"></div>
+                        <span>Classrooms</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #7DCEA0;"></div>
+                        <span>Services</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F1948A;"></div>
+                        <span>Common Areas</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FF6B6B;"></div>
+                        <span>Route Path</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4ECDC4;"></div>
+                        <span>Waypoints</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Saved Routes (Admin) -->
+            <div class="saved-routes admin-only" id="adminRoutesPanel" <?php echo !$canEdit ? 'style="display: none;"' : ''; ?>>
+                <div class="control-section">
+                    <h3>📚 Saved Routes</h3>
+                    
+                    <div class="stats-grid" id="adminStats" style="display: none;">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalRoutesCount">0</div>
+                            <div class="stat-label">Total Routes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="publicRoutesCount">0</div>
+                            <div class="stat-label">Public Routes</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="exportRoutes()" style="margin-top: 12px;">
+                        📤 Export All
+                    </button>
+                    <button class="btn btn-success" onclick="document.getElementById('importFile').click()">
+                        📥 Import Routes
+                    </button>
+                    <input type="file" id="importFile" accept=".json" style="display: none" onchange="importRoutes(event)">
+                </div>
+
+                <div id="savedRoutesList">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        <p><strong>No saved routes yet</strong></p>
+                        <p style="font-size: 0.9em; margin-top: 5px;">Create and save your first route!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Public Routes (non-admin) -->
+            <div class="saved-routes" id="studentRouteSelector" <?php echo $canEdit ? 'style="display: none;"' : ''; ?>>
+                <div class="instruction" style="margin-bottom: 20px;">
+                    💡 <strong>Tip:</strong> Select a route from the list to view navigation on the map!
+                </div>
+                
+                <div class="control-section">
+                    <h3>📚 Available Routes</h3>
+                    <input 
+                        type="text" 
+                        class="input-field" 
+                        id="studentRouteSearch" 
+                        placeholder="🔍 Search routes by name or room..."
+                        oninput="filterStudentRoutes()"
+                        style="margin-bottom: 15px;"
+                    >
+                    <p style="color: var(--gray-600); font-size: 0.95em; margin-bottom: 15px;">
+                        Click on any route below to display it on the map
+                    </p>
+                </div>
+
+                <div id="studentRoutesList">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        <p><strong>No routes available</strong></p>
+                        <p style="font-size: 0.9em; margin-top: 5px;">Check back later for available routes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pass PHP variables to JavaScript
+        window.currentUserRole = '<?php echo $userRole; ?>';
+        window.canEditRoutes = <?php echo $canEdit ? 'true' : 'false'; ?>;
+        window.userFullName = '<?php echo htmlspecialchars($fullName); ?>';
+    </script>
+    <script src="js/floor-script.js"></script>
+</body>
+</html>
